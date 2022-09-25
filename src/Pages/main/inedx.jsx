@@ -59,29 +59,12 @@ class MainPage extends Component {
                     controls: false,
                 },
             ],
-            searchingText: ''
         }
     }
     render() {
-        let deleteUser = (id) => {
-            let Users = this.state.data.filter((value, index) => value.id !== id)
-            this.setState({ data: Users })
-        }
-        let FilterFunc = (searchText) => {
-            this.setState({ searchingText: searchText })
-        }
-        let AddUser = (AddText) => {
-            let UsersAdd = {
-                id: this.state.data.length + 1,
-                name: AddText,
-                controls: false,
-            }
-            this.setState({ data: [...this.state.data, UsersAdd]})
-        }
         return (
             <div>
-                <Navbar SearchName={FilterFunc} AddUser={AddUser} ></Navbar>
-                <Crud FilterTextFuncNav={this.state.searchingText} deleteUser={deleteUser} data={this.state.data}></Crud>
+                <Crud  data={this.state.data}></Crud>
             </div>
         )
     }
