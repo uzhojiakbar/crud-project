@@ -5,11 +5,23 @@ class Crud extends Component {
         super(props);
         this.state = {
             data: this.props.data,
-            AddName: ""
+            AddName: "",
+            selected: {}
         }
     }
     render() {
+        let OnUpdate = (selected) => {
+            this.setState({ selected })
+        }
+        let OnUpdateCancel = () =>{
+            this.setState({ selected: null })
+        }
+        // let onChangeValue = ({target:{value}}) => {
+        //     this.setState({selected: {...this.state.selected, name: value}})
+        // }
+        let OnUpdateSave = () =>{
 
+        }
         return (
             <div className="crud">
                 <div className="crud-main">
@@ -24,15 +36,23 @@ class Crud extends Component {
                                 {index + 1}
                             </div>
                             <div className="username">
-                                {value.name}
+                                {this.state.selected?.id == value.id ?
+                                    <input type="text" onChange={onChangeValue} value={this.state.selected.name} />
+                                    : value.name
+                                }
                             </div>
                             <div className="user-controls">
-                                <button onClick={() => this.props.deleteUser(value.id)}>
-                                    Delete
-                                </button>
-                                <button>
-                                    Edit
-                                </button>
+                                {this.state.selected?.id == value.id ?
+                                    <>
+                                        <button>Save</button>
+                                        <button onClick={OnUpdateCancel}>Cancel</button>
+                                    </>
+                                    :
+                                    <>
+                                        <button onClick={() => this.props.deleteUser(value.id)}>Delete</button>
+                                        <button onClick={() => OnUpdate(value)}>Edit</button>
+                                    </>
+                                }
                             </div>
                         </div>))}
 

@@ -61,7 +61,7 @@
 
 .user-controls>button {
     padding: 10px;
-    min-width: 100px;
+    width: 150px;
     font-size: 20px;
     padding: 4px 30px;
     text-align: center;
